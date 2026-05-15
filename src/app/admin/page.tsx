@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
-import { LogOut, RefreshCw, Mail, Phone, MessageSquare, Calendar, Briefcase, Link } from "lucide-react";
+import { LogOut, RefreshCw, Mail, Phone, MessageSquare, Calendar } from "lucide-react";
 
 type Submission = {
   id: string;
@@ -11,24 +11,11 @@ type Submission = {
   created_at: string;
 };
 
-type Application = {
-  id: string;
-  job_title: string;
-  name: string;
-  email: string;
-  phone: string | null;
-  portfolio: string | null;
-  cover_letter: string;
-  created_at: string;
-};
-
 export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [authed, setAuthed] = useState(false);
   const [authError, setAuthError] = useState("");
-  const [tab, setTab] = useState<"contacts" | "applications">("contacts");
   const [submissions, setSubmissions] = useState<Submission[]>([]);
-  const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -36,15 +23,10 @@ export default function AdminPage() {
     setLoading(true);
     setError("");
     try {
-      const [cRes, aRes] = await Promise.all([
-        fetch("/api/admin/submissions", { headers: { "x-admin-password": pwd } }),
-        fetch("/api/admin/applications", { headers: { "x-admin-password": pwd } }),
-      ]);
-      const [cData, aData] = await Promise.all([cRes.json(), aRes.json()]);
-      if (!cRes.ok) throw new Error(cData.error || "Failed to fetch contacts.");
-      if (!aRes.ok) throw new Error(aData.error || "Failed to fetch applications.");
-      setSubmissions(cData.submissions);
-      setApplications(aData.applications);
+      const res = await fetch("/api/admin/submissions", { headers: { "x-admin-password": pwd } });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to fetch contacts.");
+      setSubmissions(data.submissions);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
@@ -73,7 +55,6 @@ export default function AdminPage() {
     sessionStorage.removeItem("admin_pwd");
     setAuthed(false);
     setSubmissions([]);
-    setApplications([]);
     setPassword("");
   }
 
@@ -132,12 +113,10 @@ export default function AdminPage() {
       </div>
 
       {/* Stats */}
-      <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-2">
         {[
-          { label: "Total Enquiries",    value: submissions.length },
-          { label: "Enquiries (Month)",  value: submissions.filter(s => thisMonth(s.created_at)).length },
-          { label: "Total Applications", value: applications.length },
-          { label: "Applications (Month)", value: applications.filter(a => thisMonth(a.created_at)).length },
+          { label: "Total Enquiries",   value: submissions.length },
+          { label: "Enquiries (Month)", value: submissions.filter(s => thisMonth(s.created_at)).length },
         ].map(({ label, value }) => (
           <div key={label} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
             <p className="text-sm text-slate-500 dark:text-slate-400">{label}</p>
@@ -146,98 +125,41 @@ export default function AdminPage() {
         ))}
       </div>
 
-      {/* Tabs */}
-      <div className="mb-6 flex gap-2">
-        <button
-          onClick={() => setTab("contacts")}
-          className={`flex items-center gap-2 rounded-xl px-5 py-2 text-sm font-semibold transition ${tab === "contacts" ? "bg-blue-700 text-white" : "border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300"}`}
-        >
-          <Mail size={15} /> Contact Enquiries ({submissions.length})
-        </button>
-        <button
-          onClick={() => setTab("applications")}
-          className={`flex items-center gap-2 rounded-xl px-5 py-2 text-sm font-semibold transition ${tab === "applications" ? "bg-blue-700 text-white" : "border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300"}`}
-        >
-          <Briefcase size={15} /> Job Applications ({applications.length})
-        </button>
-      </div>
+      <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white">
+        <Mail size={18} /> Contact Enquiries ({submissions.length})
+      </h2>
 
       {loading && <p className="text-center text-slate-500">Loading...</p>}
       {error && <p className="text-center text-red-600">{error}</p>}
 
-      {/* Contact Submissions */}
-      {tab === "contacts" && !loading && (
-        <div className="space-y-4">
-          {submissions.length === 0 && (
-            <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center dark:border-slate-700 dark:bg-slate-900">
-              <p className="text-slate-500">No contact submissions yet.</p>
+      <div className="space-y-4">
+        {!loading && submissions.length === 0 && (
+          <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center dark:border-slate-700 dark:bg-slate-900">
+            <p className="text-slate-500">No contact submissions yet.</p>
+          </div>
+        )}
+        {submissions.map((s) => (
+          <div key={s.id} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+            <div className="flex flex-wrap items-start justify-between gap-2">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white">{s.name}</h2>
+              <span className="flex items-center gap-1 text-xs text-slate-400">
+                <Calendar size={12} /> {new Date(s.created_at).toLocaleString()}
+              </span>
             </div>
-          )}
-          {submissions.map((s) => (
-            <div key={s.id} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-              <div className="flex flex-wrap items-start justify-between gap-2">
-                <h2 className="text-lg font-bold text-slate-900 dark:text-white">{s.name}</h2>
-                <span className="flex items-center gap-1 text-xs text-slate-400">
-                  <Calendar size={12} /> {new Date(s.created_at).toLocaleString()}
-                </span>
-              </div>
-              <div className="mt-3 flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-400">
-                <span className="flex items-center gap-1">
-                  <Mail size={14} />
-                  <a href={`mailto:${s.email}`} className="hover:text-blue-700 hover:underline">{s.email}</a>
-                </span>
-                {s.mobile && <span className="flex items-center gap-1"><Phone size={14} /> {s.mobile}</span>}
-              </div>
-              <div className="mt-4 flex items-start gap-2 rounded-xl bg-slate-50 p-4 dark:bg-slate-800">
-                <MessageSquare size={15} className="mt-0.5 shrink-0 text-slate-400" />
-                <p className="text-sm text-slate-700 dark:text-slate-300">{s.message}</p>
-              </div>
+            <div className="mt-3 flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-400">
+              <span className="flex items-center gap-1">
+                <Mail size={14} />
+                <a href={`mailto:${s.email}`} className="hover:text-blue-700 hover:underline">{s.email}</a>
+              </span>
+              {s.mobile && <span className="flex items-center gap-1"><Phone size={14} /> {s.mobile}</span>}
             </div>
-          ))}
-        </div>
-      )}
-
-      {/* Job Applications */}
-      {tab === "applications" && !loading && (
-        <div className="space-y-4">
-          {applications.length === 0 && (
-            <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center dark:border-slate-700 dark:bg-slate-900">
-              <p className="text-slate-500">No job applications yet.</p>
+            <div className="mt-4 flex items-start gap-2 rounded-xl bg-slate-50 p-4 dark:bg-slate-800">
+              <MessageSquare size={15} className="mt-0.5 shrink-0 text-slate-400" />
+              <p className="text-sm text-slate-700 dark:text-slate-300">{s.message}</p>
             </div>
-          )}
-          {applications.map((a) => (
-            <div key={a.id} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-              <div className="flex flex-wrap items-start justify-between gap-2">
-                <div>
-                  <h2 className="text-lg font-bold text-slate-900 dark:text-white">{a.name}</h2>
-                  <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-blue-100 px-3 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-400">
-                    <Briefcase size={11} /> {a.job_title}
-                  </span>
-                </div>
-                <span className="flex items-center gap-1 text-xs text-slate-400">
-                  <Calendar size={12} /> {new Date(a.created_at).toLocaleString()}
-                </span>
-              </div>
-              <div className="mt-3 flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-400">
-                <span className="flex items-center gap-1">
-                  <Mail size={14} />
-                  <a href={`mailto:${a.email}`} className="hover:text-blue-700 hover:underline">{a.email}</a>
-                </span>
-                {a.phone && <span className="flex items-center gap-1"><Phone size={14} /> {a.phone}</span>}
-                {a.portfolio && (
-                  <a href={a.portfolio} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-blue-700 hover:underline dark:text-blue-400">
-                    <Link size={14} /> Portfolio
-                  </a>
-                )}
-              </div>
-              <div className="mt-4 flex items-start gap-2 rounded-xl bg-slate-50 p-4 dark:bg-slate-800">
-                <MessageSquare size={15} className="mt-0.5 shrink-0 text-slate-400" />
-                <p className="text-sm text-slate-700 dark:text-slate-300">{a.cover_letter}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

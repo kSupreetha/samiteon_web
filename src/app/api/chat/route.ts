@@ -1,9 +1,13 @@
 import OpenAI from "openai";
 
-const groq = new OpenAI({
-  apiKey: process.env.GROQ_API_KEY!,
-  baseURL: "https://api.groq.com/openai/v1",
-});
+export const dynamic = "force-dynamic";
+
+function getClient() {
+  return new OpenAI({
+    apiKey: process.env.GROQ_API_KEY ?? "",
+    baseURL: "https://api.groq.com/openai/v1",
+  });
+}
 
 const SYSTEM_PROMPT = `You are a helpful AI assistant for Samiteon, a leading IT services company based in Chennai, Tamil Nadu, India.
 
@@ -49,7 +53,7 @@ export async function POST(request: Request) {
       content: m.content,
     }));
 
-    const completion = await groq.chat.completions.create({
+    const completion = await getClient().chat.completions.create({
       model: "llama-3.3-70b-versatile",
       messages: [{ role: "system", content: SYSTEM_PROMPT }, ...history],
     });

@@ -15,6 +15,7 @@ const itServiceHrefs = [
   "/services/erp",
   "/services/website-development",
   "/services/data-science",
+  "/services/data-engineering",
 ];
 
 const solutionHrefs = [

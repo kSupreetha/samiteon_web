@@ -2,12 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
-import { LanguageProvider } from "@/contexts/LanguageContext";
 import ParticleBackground from "@/components/ParticleBackground";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
-import ChatBotWrapper from "@/components/ChatBotWrapper";
+import ChatBotWrapper from "@/components/ChatBotWrapper";  
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +16,7 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-});
+});   
 
 export const metadata: Metadata = {
   title: "Samiteon — Digital Solutions for Modern Businesses",
@@ -37,16 +36,14 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <LanguageProvider>
-          <ThemeProvider>
-            <ParticleBackground />
-            <Navbar />
-            <div className="flex-1">{children}</div>
-            <Footer />
-            <ScrollToTop />
-            <ChatBotWrapper />
-          </ThemeProvider>
-        </LanguageProvider>
+        <ThemeProvider>
+          <ParticleBackground />
+          <Navbar />
+          <div className="flex-1">{children}</div>
+          <Footer />
+          <ScrollToTop />
+        <ChatBotWrapper />
+        </ThemeProvider>
       </body>
     </html>
   );

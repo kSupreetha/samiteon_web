@@ -8,7 +8,7 @@ const en = {
     aboutUs: "About Us",
     careers: "Careers",
     contactUs: "Contact Us",
-    itServiceItems: ["Staff Augmentation","Accounting Services","Salesforce Consulting","ERP Consulting","Web Development","AI/ML"],
+    itServiceItems: ["Staff Augmentation","Accounting Services","Salesforce Consulting","ERP Consulting","Web Development","AI/ML","Data Engineering"],
     solutionItems: ["Mommy Care", "Lynx", "Samiteon PMS", "Senior Care", "Data Engineering"],
   },
   hero: {
@@ -38,6 +38,7 @@ const en = {
       { title: "ERP Consulting", desc: "We provide specialized ERP consulting for Epicor and NetSuite, ensuring smooth implementation and optimized performance for your business operations." },
       { title: "Web Development", desc: "We create custom websites that are visually stunning and highly functional, ensuring a seamless user experience and driving your online success." },
       { title: "AI/ML", desc: "We provide advanced AI and Machine Learning solutions, turning your data into actionable insights and intelligent automation for a competitive edge." },
+      { title: "Data Engineering", desc: "End-to-end data engineering solutions — pipelines, warehousing, and analytics infrastructure that turn raw data into business-ready insights." },
     ],
   },
   projects: {
@@ -80,7 +81,7 @@ const en = {
     itServices: "IT Services", solutions: "Products", company: "Company", followUs: "Follow Us",
     copyright: "© 2026 Samiteon. All rights reserved.",
     companyLinks: ["About", "Contact Us", "Careers"],
-    itServiceItems: ["Staff Augmentation","Accounting Services","Salesforce Consulting","ERP Consulting","Web Development","AI/ML"],
+    itServiceItems: ["Staff Augmentation","Accounting Services","Salesforce Consulting","ERP Consulting","Web Development","AI/ML","Data Engineering"],
     solutionItems: ["Mommy Care", "Lynx", "Samiteon PMS", "Senior Care", "Data Engineering"],
   },
 };
@@ -92,7 +93,7 @@ export const translations: Record<Lang, typeof en> = {
     dir: "ltr",
     nav: {
       itServices: "Servicios TI", solutions: "Productos", aboutUs: "Sobre Nosotros", careers: "Carreras", contactUs: "Contáctenos",
-      itServiceItems: ["Aumento de Personal","Servicios Contables","Consultoría Salesforce","Consultoría ERP","Desarrollo Web","IA/ML"],
+      itServiceItems: ["Aumento de Personal","Servicios Contables","Consultoría Salesforce","Consultoría ERP","Desarrollo Web","IA/ML","Ingeniería de Datos"],
       solutionItems: ["Mommy Care", "Lynx", "Samiteon PMS", "Senior Care", "Ingeniería de Datos"],
     },
     hero: {
@@ -122,6 +123,7 @@ export const translations: Record<Lang, typeof en> = {
         { title: "Consultoría ERP", desc: "Proporcionamos consultoría ERP especializada para Epicor y NetSuite, garantizando una implementación sin problemas y un rendimiento optimizado." },
         { title: "Desarrollo Web", desc: "Creamos sitios web personalizados que son visualmente impresionantes y altamente funcionales, garantizando una experiencia de usuario perfecta." },
         { title: "IA/ML", desc: "Proporcionamos soluciones avanzadas de IA y Machine Learning, convirtiendo sus datos en información procesable y automatización inteligente." },
+        { title: "Ingeniería de Datos", desc: "Soluciones de ingeniería de datos de extremo a extremo — pipelines y análisis que convierten datos en información de negocio." },
       ],
     },
     projects: {
@@ -164,7 +166,7 @@ export const translations: Record<Lang, typeof en> = {
       itServices: "Servicios TI", solutions: "Productos", company: "Empresa", followUs: "Síguenos",
       copyright: "© 2026 Samiteon. Todos los derechos reservados.",
       companyLinks: ["Sobre Nosotros", "Contáctenos", "Carreras"],
-      itServiceItems: ["Aumento de Personal","Servicios Contables","Consultoría Salesforce","Consultoría ERP","Desarrollo Web","IA/ML"],
+      itServiceItems: ["Aumento de Personal","Servicios Contables","Consultoría Salesforce","Consultoría ERP","Desarrollo Web","IA/ML","Ingeniería de Datos"],
       solutionItems: ["Mommy Care", "Lynx", "Samiteon PMS", "Senior Care", "Ingeniería de Datos"],
     },
   },
@@ -173,7 +175,7 @@ export const translations: Record<Lang, typeof en> = {
     dir: "rtl",
     nav: {
       itServices: "خدمات تقنية المعلومات", solutions: "المنتجات", aboutUs: "من نحن", careers: "الوظائف", contactUs: "اتصل بنا",
-      itServiceItems: ["تعزيز الموظفين","الخدمات المحاسبية","استشارات Salesforce","استشارات ERP","تطوير الويب","الذكاء الاصطناعي/ML"],
+      itServiceItems: ["تعزيز الموظفين","الخدمات المحاسبية","استشارات Salesforce","استشارات ERP","تطوير الويب","الذكاء الاصطناعي/ML","هندسة البيانات"],
       solutionItems: ["Mommy Care", "Lynx", "Samiteon PMS", "Senior Care", "هندسة البيانات"],
     },
     hero: {
@@ -203,6 +205,7 @@ export const translations: Record<Lang, typeof en> = {
         { title: "استشارات ERP", desc: "نقدم استشارات ERP متخصصة لـ Epicor وNetSuite، مما يضمن التنفيذ السلس والأداء الأمثل." },
         { title: "تطوير الويب", desc: "نبتكر مواقع ويب مخصصة مذهلة بصرياً وعالية الأداء، مما يضمن تجربة مستخدم سلسة وتعزز نجاحك الرقمي." },
         { title: "الذكاء الاصطناعي/ML", desc: "نقدم حلول متقدمة للذكاء الاصطناعي والتعلم الآلي، تحول بياناتك إلى رؤى قابلة للتنفيذ وأتمتة ذكية." },
+        { title: "هندسة البيانات", desc: "حلول هندسة بيانات شاملة — خطوط أنابيب وتخزين وبنية تحليلات تحول البيانات الخام إلى رؤى جاهزة للأعمال." },
       ],
     },
     projects: {
@@ -245,7 +248,7 @@ export const translations: Record<Lang, typeof en> = {
       itServices: "خدمات تقنية المعلومات", solutions: "المنتجات", company: "الشركة", followUs: "تابعنا",
       copyright: "© 2026 Samiteon. جميع الحقوق محفوظة.",
       companyLinks: ["من نحن", "اتصل بنا", "الوظائف"],
-      itServiceItems: ["تعزيز الموظفين","الخدمات المحاسبية","استشارات Salesforce","استشارات ERP","تطوير الويب","الذكاء الاصطناعي/ML"],
+      itServiceItems: ["تعزيز الموظفين","الخدمات المحاسبية","استشارات Salesforce","استشارات ERP","تطوير الويب","الذكاء الاصطناعي/ML","هندسة البيانات"],
       solutionItems: ["Mommy Care", "Lynx", "Samiteon PMS", "Senior Care", "هندسة البيانات"],
     },
   },
@@ -254,7 +257,7 @@ export const translations: Record<Lang, typeof en> = {
     dir: "ltr",
     nav: {
       itServices: "IT-Dienste", solutions: "Produkte", aboutUs: "Über Uns", careers: "Karriere", contactUs: "Kontakt",
-      itServiceItems: ["Personalvermittlung","Buchhaltungsdienste","Salesforce-Beratung","ERP-Beratung","Web-Entwicklung","KI/ML"],
+      itServiceItems: ["Personalvermittlung","Buchhaltungsdienste","Salesforce-Beratung","ERP-Beratung","Web-Entwicklung","KI/ML","Datentechnik"],
       solutionItems: ["Mommy Care", "Lynx", "Samiteon PMS", "Senior Care", "Datentechnik"],
     },
     hero: {
@@ -284,6 +287,7 @@ export const translations: Record<Lang, typeof en> = {
         { title: "ERP-Beratung", desc: "Wir bieten spezialisierte ERP-Beratung für Epicor und NetSuite, die eine reibungslose Implementierung und optimale Leistung gewährleistet." },
         { title: "Web-Entwicklung", desc: "Wir erstellen maßgeschneiderte Websites, die visuell beeindruckend und hochfunktional sind und ein nahtloses Benutzererlebnis bieten." },
         { title: "KI/ML", desc: "Wir bieten fortschrittliche KI- und Machine-Learning-Lösungen, die Ihre Daten in verwertbare Erkenntnisse und intelligente Automatisierung umwandeln." },
+        { title: "Datentechnik", desc: "End-to-End-Datentechnik-Lösungen — Pipelines, Warehousing und Analyseinfrastruktur, die Rohdaten in geschäftsfertige Erkenntnisse umwandeln." },
       ],
     },
     projects: {
@@ -326,7 +330,7 @@ export const translations: Record<Lang, typeof en> = {
       itServices: "IT-Dienste", solutions: "Produkte", company: "Unternehmen", followUs: "Folgen Sie Uns",
       copyright: "© 2026 Samiteon. Alle Rechte vorbehalten.",
       companyLinks: ["Über Uns", "Kontakt", "Karriere"],
-      itServiceItems: ["Personalvermittlung","Buchhaltungsdienste","Salesforce-Beratung","ERP-Beratung","Web-Entwicklung","KI/ML"],
+      itServiceItems: ["Personalvermittlung","Buchhaltungsdienste","Salesforce-Beratung","ERP-Beratung","Web-Entwicklung","KI/ML","Datentechnik"],
       solutionItems: ["Mommy Care", "Lynx", "Samiteon PMS", "Senior Care", "Datentechnik"],
     },
   },

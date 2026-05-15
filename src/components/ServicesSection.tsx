@@ -3,12 +3,13 @@ import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const colors = [
-  { color: "border-t-blue-500",   dot: "bg-blue-500",   href: "/services/staff-augmentation" },
+  { color: "border-t-blue-500",    dot: "bg-blue-500",    href: "/services/staff-augmentation" },
   { color: "border-t-emerald-500", dot: "bg-emerald-500", href: "/services/accounting" },
-  { color: "border-t-sky-500",    dot: "bg-sky-500",    href: "/services/salesforce" },
-  { color: "border-t-violet-500", dot: "bg-violet-500", href: "/services/erp" },
-  { color: "border-t-pink-500",   dot: "bg-pink-500",   href: "/services/website-development" },
-  { color: "border-t-cyan-500",   dot: "bg-cyan-500",   href: "/services/data-science" },
+  { color: "border-t-sky-500",     dot: "bg-sky-500",     href: "/services/salesforce" },
+  { color: "border-t-violet-500",  dot: "bg-violet-500",  href: "/services/erp" },
+  { color: "border-t-pink-500",    dot: "bg-pink-500",    href: "/services/website-development" },
+  { color: "border-t-cyan-500",    dot: "bg-cyan-500",    href: "/services/data-science" },
+  { color: "border-t-orange-500",  dot: "bg-orange-500",  href: "/services/data-engineering" },
 ];
 
 export default function ServicesSection() {
