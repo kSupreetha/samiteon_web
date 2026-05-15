@@ -1,52 +1,49 @@
-import { Globe, Smartphone, Cloud, Palette, TrendingUp, Code2 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+"use client";
+import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const services: {
-  name: string;
-  icon: LucideIcon;
-  topBorder: string;
-  iconBg: string;
-  iconColor: string;
-}[] = [
-  { name: "Web Development", icon: Globe, topBorder: "border-t-blue-500", iconBg: "bg-blue-50 dark:bg-blue-900/30", iconColor: "text-blue-600 dark:text-blue-400" },
-  { name: "App Development", icon: Smartphone, topBorder: "border-t-violet-500", iconBg: "bg-violet-50 dark:bg-violet-900/30", iconColor: "text-violet-600 dark:text-violet-400" },
-  { name: "Cloud Solutions", icon: Cloud, topBorder: "border-t-cyan-500", iconBg: "bg-cyan-50 dark:bg-cyan-900/30", iconColor: "text-cyan-600 dark:text-cyan-400" },
-  { name: "UI/UX Design", icon: Palette, topBorder: "border-t-pink-500", iconBg: "bg-pink-50 dark:bg-pink-900/30", iconColor: "text-pink-600 dark:text-pink-400" },
-  { name: "Digital Marketing", icon: TrendingUp, topBorder: "border-t-orange-500", iconBg: "bg-orange-50 dark:bg-orange-900/30", iconColor: "text-orange-600 dark:text-orange-400" },
-  { name: "Software Consulting", icon: Code2, topBorder: "border-t-green-500", iconBg: "bg-green-50 dark:bg-green-900/30", iconColor: "text-green-600 dark:text-green-400" },
+const colors = [
+  { color: "border-t-blue-500",   dot: "bg-blue-500",   href: "/services/staff-augmentation" },
+  { color: "border-t-emerald-500", dot: "bg-emerald-500", href: "/services/accounting" },
+  { color: "border-t-sky-500",    dot: "bg-sky-500",    href: "/services/salesforce" },
+  { color: "border-t-violet-500", dot: "bg-violet-500", href: "/services/erp" },
+  { color: "border-t-pink-500",   dot: "bg-pink-500",   href: "/services/website-development" },
+  { color: "border-t-cyan-500",   dot: "bg-cyan-500",   href: "/services/data-science" },
 ];
 
 export default function ServicesSection() {
-  return (
-    <section
-      id="services"
-      className="bg-[#f8fbff]/60 px-6 py-24 backdrop-blur-sm dark:bg-slate-950/60"
-      style={{
-        backgroundImage: "radial-gradient(var(--dot-color) 1px, transparent 1px)",
-        backgroundSize: "20px 20px",
-      }}
-    >
-      <div className="mx-auto max-w-7xl">
-        <p className="text-sm font-semibold uppercase text-blue-700 dark:text-blue-400">
-          Services
-        </p>
-        <h2 className="mt-3 text-3xl font-bold dark:text-white md:text-4xl">
-          What we offer
-        </h2>
+  const { t } = useLanguage();
+  const s = t.services;
 
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {services.map(({ name, icon: Icon, topBorder, iconBg, iconColor }) => (
+  return (
+    <section id="services" className="bg-white px-6 py-24 dark:bg-slate-950">
+      <div className="mx-auto max-w-7xl">
+        <p className="text-sm font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">{s.label}</p>
+        <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900 dark:text-white md:text-4xl">
+          {s.title}
+        </h2>
+        <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-600 dark:text-slate-400">
+          {s.subtitle}
+        </p>
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {s.items.map(({ title, desc }, i) => (
             <div
-              key={name}
-              className={`rounded-2xl border border-slate-200 border-t-4 ${topBorder} bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-slate-700 dark:bg-slate-800`}
+              key={title}
+              className={`flex flex-col rounded-2xl border border-slate-200 border-t-4 ${colors[i].color} bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-slate-700 dark:bg-slate-900`}
             >
-              <div className={`mb-4 inline-flex rounded-xl p-3 ${iconBg}`}>
-                <Icon className={iconColor} size={24} />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">{name}</h3>
-              <p className="mt-3 leading-7 text-slate-600 dark:text-slate-400">
-                Professional and scalable solutions designed for business growth.
-              </p>
+              <div className={`mb-3 h-1.5 w-8 rounded-full ${colors[i].dot}`} />
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">{title}</h3>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{desc}</p>
+              <Link
+                href={colors[i].href}
+                className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:underline dark:text-blue-400"
+              >
+                {s.readMore}
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
             </div>
           ))}
         </div>

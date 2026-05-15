@@ -2,15 +2,12 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import ParticleBackground from "@/components/ParticleBackground";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
-import dynamic from "next/dynamic";
-
-const ChatBot = dynamic(() => import("@/components/ChatBot"), {
-  ssr: false,
-});
+import ChatBotWrapper from "@/components/ChatBotWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,14 +37,16 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <ThemeProvider>
-          <ParticleBackground />
-          <Navbar />
-          <div className="flex-1">{children}</div>
-          <Footer />
-          <ScrollToTop />
-          <ChatBot />
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <ParticleBackground />
+            <Navbar />
+            <div className="flex-1">{children}</div>
+            <Footer />
+            <ScrollToTop />
+            <ChatBotWrapper />
+          </ThemeProvider>
+        </LanguageProvider>
       </body>
     </html>
   );
