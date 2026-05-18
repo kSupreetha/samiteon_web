@@ -199,7 +199,7 @@ function ProfileModal({ person, onClose }: { person: Person; onClose: () => void
         {/* Header */}
         <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
           <div className="flex items-center gap-4">
-            <div className="relative h-20 w-16 shrink-0 overflow-hidden rounded-xl ring-4 ring-blue-100 dark:ring-blue-900">
+            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl ring-4 ring-blue-100 dark:ring-blue-900">
               <Image src={person.avatar} alt={person.name} fill className="object-cover object-top" />
             </div>
             <div>
@@ -233,7 +233,7 @@ function PersonCard({ person }: { person: Person }) {
   return (
     <>
       <div className="flex flex-col rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-slate-700 dark:bg-slate-900">
-        <div className="relative mx-auto h-32 w-24 overflow-hidden rounded-2xl ring-4 ring-blue-100 dark:ring-blue-900">
+        <div className="relative mx-auto h-28 w-28 overflow-hidden rounded-2xl ring-4 ring-blue-100 dark:ring-blue-900">
           <Image src={person.avatar} alt={person.name} fill className="object-cover object-top" />
         </div>
         <div className="mt-4 text-center">
@@ -261,7 +261,7 @@ function AdvisorCard({ person }: { person: Person }) {
   return (
     <>
       <div className="flex gap-5 rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-        <div className="relative h-28 w-20 shrink-0 overflow-hidden rounded-2xl ring-4 ring-blue-100 dark:ring-blue-900">
+        <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl ring-4 ring-blue-100 dark:ring-blue-900">
           <Image src={person.avatar} alt={person.name} fill className="object-cover object-top" />
         </div>
         <div className="flex flex-col">
