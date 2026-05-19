@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 export default function ThemeProvider({ children }: { children: ReactNode }) {
   return (
-    <NextThemesProvider attribute="class" defaultTheme="light" enableSystem={false}>
+    <NextThemesProvider attribute="class" defaultTheme="light" enableSystem={false} forcedTheme="light">
       {children}
     </NextThemesProvider>
   );

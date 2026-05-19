@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type Person = {
   name: string;
@@ -12,6 +13,28 @@ type Person = {
 };
 
 const team: Person[] = [
+  {
+    name: 'Dr. Sundeep "Sunny" Dronawat',
+    role: "Advisor",
+    bio: "A distinguished entrepreneur, academic, and innovator with a profound impact across various sectors. Founded and scaled POS on Cloud, which merged with Newtek in 2019.",
+    avatar: "/team/sunny.webp",
+    fullBio: [
+      "Dr. Sundeep \"Sunny\" Dronawat is a distinguished entrepreneur, academic, and innovator with a profound impact across various sectors. He has a rich history of founding and scaling companies, notably POS on Cloud, which successfully merged with Newtek in 2019.",
+      "Holding a Ph.D. in Chemical Engineering and an MBA from the University of Louisville, his expertise spans chemical to biochemical engineering, underscored by significant academic contributions as an adjunct professor at several universities.",
+      "Sunny's leadership extends to chairing the Louisville Water Company and serving on the board of Jefferson Community and Technical College, demonstrating his commitment to community and technical education. His contributions have been recognized through numerous awards, including the MOSIAC AWARD for outstanding immigrant contributions and the title of Kentucky Colonel.",
+    ],
+  },
+  {
+    name: "Curtis Warfield",
+    role: "Advisor",
+    bio: "Accomplished executive with C-suite experience in Fortune 500 organizations. Leads Windham Advisors and serves on boards of Texas Roadhouse and Talkspace.",
+    avatar: "/team/curtis.webp",
+    fullBio: [
+      "Curtis Warfield is an accomplished executive and entrepreneur with extensive C-suite experience in Fortune 500 organizations. He has a proven track record of transformational leadership, consistently driving performance by identifying strategic imperatives that enhance profitability and ensure long-term success.",
+      "Curtis leads Windham Advisors, a private equity firm, and brings seasoned board experience from both public and private equity companies. He is recognized for delivering innovative solutions that fuel revenue growth, optimize margins, and mitigate risks.",
+      "Currently, Curtis serves on the boards of Texas Roadhouse (Nasdaq: TXRH) and Talkspace (Nasdaq: TALK). His leadership across Fortune 50-250 companies includes key roles as divisional CEO and CFO. At Samiteon, Curtis leverages his deep expertise to drive growth and innovation, positioning the company as a leader in technology solutions.",
+    ],
+  },
   {
     name: "Harsha Dronawat",
     role: "Chairperson & CEO",
@@ -48,29 +71,6 @@ const team: Person[] = [
     ],
   },
   {
-    name: "Arushi Jain",
-    role: "Director of Sales & Marketing",
-    bio: "Enterprise Technical Account Manager and acting Sales Leader leading strategic enterprise relationships across AI-driven, ERP-integrated, and API-based platforms.",
-    avatar: "/team/arushi.webp",
-    fullBio: [
-      "Arushi Jain is an Enterprise Technical Account Manager and acting Sales Leader at Samiteon, where she leads strategic enterprise relationships across AI-driven, ERP-integrated, and API-based platforms. She partners with global organizations, including Flint Labs, Dell, AB InBev, Tech Mahindra, Otis, Newtek, and IPM, working closely with executive and technical stakeholders to drive adoption, expansion, and long-term customer value.",
-      "With over a decade of leadership experience and more than five years in PLG-driven SaaS environments, Arushi brings deep expertise in enterprise customer strategy, post-sales execution, and revenue growth. Her work spans technical onboarding, enablement, renewals, and expansion, with a strong focus on translating complex systems into clear business outcomes.",
-      "At Samiteon, Arushi serves as a trusted advisor to customers and internal teams alike, collaborating closely with Product, Engineering, and Sales to accelerate time-to-value and influence solution delivery. She also leads and mentors SDR teams supporting outbound and expansion initiatives, contributing directly to pipeline development and go-to-market execution.",
-      "Known for her strategic rigor, cross-functional leadership, and consultative approach, Arushi operates at the intersection of technology, revenue, and customer trust — helping enterprises scale with confidence.",
-    ],
-  },
-  {
-    name: "Paramita",
-    role: "USA Project & Client Manager",
-    bio: "Process-oriented professional with 12+ years as a Business Analyst, QA Analyst, UAT Specialist, and Project Manager across multiple domains including Agile environments.",
-    avatar: "/team/paramita.webp",
-    fullBio: [
-      "With over 12 years of hands-on experience, I am a process-oriented and highly organized professional, having worked as a Business Analyst, QA Analyst, UAT Specialist, and Project Manager across multiple domains, including Agile environments. I am an inquisitive communicator, problem solver, critical thinker, and detail-oriented visualizer with a focus on both the big picture and finer details.",
-      "I believe in the importance of well-established processes for crafting better requirements throughout the Software Development Life Cycle. My work involves close collaboration with stakeholders and SMEs, covering everything from requirement gathering, creating high-level documents, quality checks, handling change requests, and overseeing UAT to providing support and handing over to clients.",
-      "My diverse experience, coupled with Agile methodologies, provides me with in-depth knowledge of business process analysis, structured software development practices, and project management best practices.",
-    ],
-  },
-  {
     name: "Salonee Dronawat",
     role: "Head of HR Operations, Tech Med & Client Relationship",
     bio: "Leads HR strategy while overseeing TechMed initiatives and nurturing key client relationships. With 10+ years in HR management dedicated to driving operational excellence.",
@@ -101,6 +101,29 @@ const team: Person[] = [
       "Anand is a software industry veteran having played many roles in his stellar career as a serial entrepreneur ranging from building and scaling, to leading, being on the board, advising and mentoring many successful ventures.",
       "An evangelist at heart, Anand is championing industry disruption through adoption of products and solutions based on emerging technologies.",
       "In his free time, Anand enjoys cooking, listening to Hindustani music and reading.",
+    ],
+  },
+  {
+    name: "Arushi Jain",
+    role: "Director of Sales & Marketing",
+    bio: "Enterprise Technical Account Manager and acting Sales Leader leading strategic enterprise relationships across AI-driven, ERP-integrated, and API-based platforms.",
+    avatar: "/team/arushi.webp",
+    fullBio: [
+      "Arushi Jain is an Enterprise Technical Account Manager and acting Sales Leader at Samiteon, where she leads strategic enterprise relationships across AI-driven, ERP-integrated, and API-based platforms. She partners with global organizations, including Flint Labs, Dell, AB InBev, Tech Mahindra, Otis, Newtek, and IPM, working closely with executive and technical stakeholders to drive adoption, expansion, and long-term customer value.",
+      "With over a decade of leadership experience and more than five years in PLG-driven SaaS environments, Arushi brings deep expertise in enterprise customer strategy, post-sales execution, and revenue growth. Her work spans technical onboarding, enablement, renewals, and expansion, with a strong focus on translating complex systems into clear business outcomes.",
+      "At Samiteon, Arushi serves as a trusted advisor to customers and internal teams alike, collaborating closely with Product, Engineering, and Sales to accelerate time-to-value and influence solution delivery. She also leads and mentors SDR teams supporting outbound and expansion initiatives, contributing directly to pipeline development and go-to-market execution.",
+      "Known for her strategic rigor, cross-functional leadership, and consultative approach, Arushi operates at the intersection of technology, revenue, and customer trust — helping enterprises scale with confidence.",
+    ],
+  },
+  {
+    name: "Paramita",
+    role: "USA Project & Client Manager",
+    bio: "Process-oriented professional with 12+ years as a Business Analyst, QA Analyst, UAT Specialist, and Project Manager across multiple domains including Agile environments.",
+    avatar: "/team/paramita.webp",
+    fullBio: [
+      "With over 12 years of hands-on experience, I am a process-oriented and highly organized professional, having worked as a Business Analyst, QA Analyst, UAT Specialist, and Project Manager across multiple domains, including Agile environments. I am an inquisitive communicator, problem solver, critical thinker, and detail-oriented visualizer with a focus on both the big picture and finer details.",
+      "I believe in the importance of well-established processes for crafting better requirements throughout the Software Development Life Cycle. My work involves close collaboration with stakeholders and SMEs, covering everything from requirement gathering, creating high-level documents, quality checks, handling change requests, and overseeing UAT to providing support and handing over to clients.",
+      "My diverse experience, coupled with Agile methodologies, provides me with in-depth knowledge of business process analysis, structured software development practices, and project management best practices.",
     ],
   },
   {
@@ -148,32 +171,7 @@ const team: Person[] = [
   },
 ];
 
-const advisors: Person[] = [
-  {
-    name: 'Dr. Sundeep "Sunny" Dronawat',
-    role: "Advisor",
-    bio: "A distinguished entrepreneur, academic, and innovator with a profound impact across various sectors. Founded and scaled POS on Cloud, which merged with Newtek in 2019.",
-    avatar: "/team/sunny.webp",
-    fullBio: [
-      "Dr. Sundeep \"Sunny\" Dronawat is a distinguished entrepreneur, academic, and innovator with a profound impact across various sectors. He has a rich history of founding and scaling companies, notably POS on Cloud, which successfully merged with Newtek in 2019.",
-      "Holding a Ph.D. in Chemical Engineering and an MBA from the University of Louisville, his expertise spans chemical to biochemical engineering, underscored by significant academic contributions as an adjunct professor at several universities.",
-      "Sunny's leadership extends to chairing the Louisville Water Company and serving on the board of Jefferson Community and Technical College, demonstrating his commitment to community and technical education. His contributions have been recognized through numerous awards, including the MOSIAC AWARD for outstanding immigrant contributions and the title of Kentucky Colonel.",
-    ],
-  },
-  {
-    name: "Curtis Warfield",
-    role: "Advisor",
-    bio: "Accomplished executive with C-suite experience in Fortune 500 organizations. Leads Windham Advisors and serves on boards of Texas Roadhouse and Talkspace.",
-    avatar: "/team/curtis.webp",
-    fullBio: [
-      "Curtis Warfield is an accomplished executive and entrepreneur with extensive C-suite experience in Fortune 500 organizations. He has a proven track record of transformational leadership, consistently driving performance by identifying strategic imperatives that enhance profitability and ensure long-term success.",
-      "Curtis leads Windham Advisors, a private equity firm, and brings seasoned board experience from both public and private equity companies. He is recognized for delivering innovative solutions that fuel revenue growth, optimize margins, and mitigate risks.",
-      "Currently, Curtis serves on the boards of Texas Roadhouse (Nasdaq: TXRH) and Talkspace (Nasdaq: TALK). His leadership across Fortune 50-250 companies includes key roles as divisional CEO and CFO. At Samiteon, Curtis leverages his deep expertise to drive growth and innovation, positioning the company as a leader in technology solutions.",
-    ],
-  },
-];
 
-const PER_PAGE = 4;
 
 function ProfileModal({ person, onClose }: { person: Person; onClose: () => void }) {
   React.useEffect(() => {
@@ -233,7 +231,7 @@ function PersonCard({ person }: { person: Person }) {
   return (
     <>
       <div className="flex flex-col rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-slate-700 dark:bg-slate-900">
-        <div className="relative mx-auto h-28 w-28 overflow-hidden rounded-2xl ring-4 ring-blue-100 dark:ring-blue-900">
+        <div className="relative mx-auto h-36 w-28 overflow-hidden rounded-full ring-4 ring-blue-100 dark:ring-blue-900">
           <Image src={person.avatar} alt={person.name} fill className="object-cover object-top" />
         </div>
         <div className="mt-4 text-center">
@@ -256,93 +254,96 @@ function PersonCard({ person }: { person: Person }) {
   );
 }
 
-function AdvisorCard({ person }: { person: Person }) {
-  const [open, setOpen] = React.useState(false);
-  return (
-    <>
-      <div className="flex gap-5 rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-        <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl ring-4 ring-blue-100 dark:ring-blue-900">
-          <Image src={person.avatar} alt={person.name} fill className="object-cover object-top" />
-        </div>
-        <div className="flex flex-col">
-          <h4 className="font-bold text-slate-900 dark:text-slate-100">{person.name}</h4>
-          <p className="mt-0.5 text-xs font-medium text-blue-600 dark:text-blue-400">{person.role}</p>
-          <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400 line-clamp-3">{person.bio}</p>
-          <button
-            onClick={() => setOpen(true)}
-            className="mt-3 inline-flex items-center gap-1 self-start text-sm font-semibold text-blue-600 hover:underline dark:text-blue-400"
-          >
-            Read more
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-      </div>
-      {open && <ProfileModal person={person} onClose={() => setOpen(false)} />}
-    </>
-  );
-}
 
-function ManagementCarousel() {
-  const [page, setPage] = React.useState(0);
-  const totalPages = Math.ceil(team.length / PER_PAGE);
-  const visible = team.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE);
+const groups: { label: string; members: string[] }[] = [
+  { label: "Board of Advisors", members: ['Dr. Sundeep "Sunny" Dronawat', "Curtis Warfield"] },
+  { label: "Leadership", members: ["Harsha Dronawat", "Firas Hamza"] },
+  { label: "HR & Operations", members: ["Abhay Joshi", "Salonee Dronawat", "Swathi"] },
+  { label: "Sales & Marketing", members: ["Anand Mutalik", "Arushi Jain"] },
+  { label: "Technology", members: ["Paramita", "Basavaraj P C", "Somanath M", "Sharath Chandramouli", "Bhargavi B S"] },
+];
+
+function ManagementSection() {
+  const { t } = useLanguage();
+  const a = t.about;
 
   return (
     <section className="w-full border-t border-slate-200 bg-white px-6 py-20 dark:border-slate-800 dark:bg-slate-950">
       <div className="mx-auto max-w-7xl">
-        <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">Our People</p>
-        <div className="mt-3 flex items-center justify-between">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white md:text-4xl">Management</h2>
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-slate-500 dark:text-slate-400">{page + 1} / {totalPages}</span>
-            <button
-              onClick={() => setPage(p => Math.max(0, p - 1))}
-              disabled={page === 0}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm transition hover:bg-slate-50 disabled:opacity-30 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700"
-              aria-label="Previous"
-            >
-              <svg className="h-4 w-4 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button
-              onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
-              disabled={page === totalPages - 1}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-blue-600 bg-blue-600 shadow-sm transition hover:bg-blue-500 disabled:opacity-30"
-              aria-label="Next"
-            >
-              <svg className="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+        <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white md:text-4xl">{a.management}</h2>
+        <p className="mt-2 text-base text-slate-500 dark:text-slate-400">{a.managementSub}</p>
+
+        <div className="mt-12 space-y-14">
+
+          {/* Row 1 — Advisors (left) + Leadership (right) side by side */}
+          <div className="grid gap-10 md:grid-cols-2">
+            {groups.slice(0, 2).map(({ label, members }) => {
+              const people = members.map(name => team.find(p => p.name === name)).filter(Boolean) as typeof team;
+              return (
+                <div key={label}>
+                  <div className="mb-6 flex items-center gap-3">
+                    <span className="h-6 w-1 rounded-full bg-blue-600" />
+                    <h3 className="text-lg font-bold uppercase tracking-widest text-blue-700 dark:text-blue-400">{label}</h3>
+                  </div>
+                  <div className="grid grid-cols-2 gap-5">
+                    {people.map(person => <PersonCard key={person.name} person={person} />)}
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        </div>
-        <p className="mt-2 text-base text-slate-500 dark:text-slate-400">Dedicated professionals helping you succeed.</p>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {visible.map(person => <PersonCard key={person.name} person={person} />)}
-        </div>
+          {/* HR & Operations — full row, 3 cards centered */}
+          {(() => {
+            const { label, members } = groups[2];
+            const people = members.map(name => team.find(p => p.name === name)).filter(Boolean) as typeof team;
+            return (
+              <div>
+                <div className="mb-6 flex items-center gap-3">
+                  <span className="h-6 w-1 rounded-full bg-blue-600" />
+                  <h3 className="text-lg font-bold uppercase tracking-widest text-blue-700 dark:text-blue-400">{label}</h3>
+                </div>
+                <div className="mx-auto grid max-w-3xl grid-cols-3 gap-5">
+                  {people.map(person => <PersonCard key={person.name} person={person} />)}
+                </div>
+              </div>
+            );
+          })()}
 
-        {/* Dot indicators */}
-        <div className="mt-8 flex justify-center gap-2">
-          {Array.from({ length: totalPages }).map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setPage(i)}
-              className={`h-2 rounded-full transition-all ${i === page ? "w-6 bg-blue-600" : "w-2 bg-slate-300 dark:bg-slate-600"}`}
-              aria-label={`Page ${i + 1}`}
-            />
-          ))}
-        </div>
+          {/* Sales & Marketing — full row, 2 cards centered */}
+          {(() => {
+            const { label, members } = groups[3];
+            const people = members.map(name => team.find(p => p.name === name)).filter(Boolean) as typeof team;
+            return (
+              <div>
+                <div className="mb-6 flex items-center gap-3">
+                  <span className="h-6 w-1 rounded-full bg-blue-600" />
+                  <h3 className="text-lg font-bold uppercase tracking-widest text-blue-700 dark:text-blue-400">{label}</h3>
+                </div>
+                <div className="mx-auto grid max-w-xl grid-cols-2 gap-5">
+                  {people.map(person => <PersonCard key={person.name} person={person} />)}
+                </div>
+              </div>
+            );
+          })()}
 
-        {/* Board of Advisors */}
-        <div className="mt-16">
-          <h3 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Board of Advisors</h3>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2">
-            {advisors.map(person => <AdvisorCard key={person.name} person={person} />)}
-          </div>
+          {/* Technology — full row, 5 cards */}
+          {(() => {
+            const { label, members } = groups[4];
+            const people = members.map(name => team.find(p => p.name === name)).filter(Boolean) as typeof team;
+            return (
+              <div>
+                <div className="mb-6 flex items-center gap-3">
+                  <span className="h-6 w-1 rounded-full bg-blue-600" />
+                  <h3 className="text-lg font-bold uppercase tracking-widest text-blue-700 dark:text-blue-400">{label}</h3>
+                </div>
+                <div className="grid grid-cols-3 gap-5 sm:grid-cols-5">
+                  {people.map(person => <PersonCard key={person.name} person={person} />)}
+                </div>
+              </div>
+            );
+          })()}
+
         </div>
       </div>
     </section>
@@ -350,6 +351,9 @@ function ManagementCarousel() {
 }
 
 export default function AboutSection() {
+  const { t } = useLanguage();
+  const a = t.about;
+
   return (
     <div id="about">
 
@@ -357,29 +361,21 @@ export default function AboutSection() {
       <section className="w-full border-b border-slate-200 bg-white px-6 py-20 dark:border-slate-800 dark:bg-slate-950">
         <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-2 lg:items-center">
           <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">About Samiteon</p>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">{a.label}</p>
             <h2 className="text-3xl font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100 lg:text-4xl">
-              Adaptable and Growing IT Services Provider
+              {a.title}
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-slate-600 dark:text-slate-300">
-              Samiteon has experienced impressive double-digit growth for over 20 years, showcasing its
-              adaptability and resilience in the IT industry. With a diverse service portfolio and a
-              commitment to client satisfaction, Samiteon continues to thrive in the competitive landscape.
-            </p>
+            <p className="mt-5 text-base leading-relaxed text-slate-600 dark:text-slate-300">{a.desc}</p>
             <div className="mt-8 grid gap-5 sm:grid-cols-2">
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-900">
                 <div className="mb-2 h-1 w-8 rounded-full bg-blue-500" />
-                <h3 className="font-bold text-slate-900 dark:text-slate-100">Adaptability</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                  Impressive double-digit growth underscores Samiteon's adaptability and resilience in the IT industry.
-                </p>
+                <h3 className="font-bold text-slate-900 dark:text-slate-100">{a.adaptabilityTitle}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{a.adaptabilityDesc}</p>
               </div>
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-900">
                 <div className="mb-2 h-1 w-8 rounded-full bg-blue-500" />
-                <h3 className="font-bold text-slate-900 dark:text-slate-100">Growth</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                  Samiteon's dynamic scalability enables it to meet evolving client needs across diverse projects.
-                </p>
+                <h3 className="font-bold text-slate-900 dark:text-slate-100">{a.growthTitle}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{a.growthDesc}</p>
               </div>
             </div>
           </div>
@@ -406,29 +402,19 @@ export default function AboutSection() {
             />
           </div>
           <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">CRM Excellence</p>
-            <h2 className="text-3xl font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100 lg:text-4xl">
-              Unlocking Success with Salesforce Expertise
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-slate-600 dark:text-slate-300">
-              At Samiteon, we leverage our Salesforce Certified Consulting Partner status to deliver
-              exceptional solutions that drive client success. With our expertise, we help businesses
-              harness the full potential of the Salesforce platform.
-            </p>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">{a.crmLabel}</p>
+            <h2 className="text-3xl font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100 lg:text-4xl">{a.crmTitle}</h2>
+            <p className="mt-5 text-base leading-relaxed text-slate-600 dark:text-slate-300">{a.crmDesc}</p>
             <div className="mt-8 grid gap-5 sm:grid-cols-2">
               <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-800">
                 <div className="mb-2 h-1 w-8 rounded-full bg-blue-500" />
-                <h3 className="font-bold text-slate-900 dark:text-slate-100">Trusted Partner</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                  We provide end-to-end Salesforce solutions that optimize processes and enhance customer experiences.
-                </p>
+                <h3 className="font-bold text-slate-900 dark:text-slate-100">{a.trustedPartnerTitle}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{a.trustedPartnerDesc}</p>
               </div>
               <div className="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-800">
                 <div className="mb-2 h-1 w-8 rounded-full bg-blue-500" />
-                <h3 className="font-bold text-slate-900 dark:text-slate-100">Client Success</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                  Our client-centric approach ensures that our Salesforce solutions align with your business goals.
-                </p>
+                <h3 className="font-bold text-slate-900 dark:text-slate-100">{a.clientSuccessTitle}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{a.clientSuccessDesc}</p>
               </div>
             </div>
           </div>
@@ -436,7 +422,7 @@ export default function AboutSection() {
       </section>
 
       {/* ── Management ── */}
-      <ManagementCarousel />
+      <ManagementSection />
 
     </div>
   );

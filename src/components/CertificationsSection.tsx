@@ -4,7 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const certs = [
   { src: "/webenc.svg",            alt: "WBE/WBC Certified",   bg: "bg-white" },
-  { src: "/iso-certification.jpg", alt: "ISO 9001 & 27001",    bg: "bg-black" },
+  { src: "/iso-certification.png", alt: "ISO 9001:2015 & ISO 27001:2022 Certified", bg: "bg-white" },
   { src: "/nmsdc-logo.svg",        alt: "NMSDC Certified",     bg: "bg-white" },
 ];
 

@@ -6,7 +6,8 @@ import ParticleBackground from "@/components/ParticleBackground";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
-import ChatBotWrapper from "@/components/ChatBotWrapper";  
+import ChatBotWrapper from "@/components/ChatBotWrapper";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,12 +38,14 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         <ThemeProvider>
-          <ParticleBackground />
-          <Navbar />
-          <div className="flex-1">{children}</div>
-          <Footer />
-          <ScrollToTop />
-        <ChatBotWrapper />
+          <LanguageProvider>
+            <ParticleBackground />
+            <Navbar />
+            <div className="flex-1">{children}</div>
+            <Footer />
+            <ScrollToTop />
+            <ChatBotWrapper />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

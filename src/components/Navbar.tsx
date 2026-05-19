@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, Sun, Moon, ChevronDown, Globe } from "lucide-react";
-import { useTheme } from "next-themes";
+import { Menu, X, ChevronDown, Globe } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -23,7 +22,6 @@ const solutionHrefs = [
   "/solutions/lynx",
   "/solutions/pms",
   "/solutions/senior-care",
-  "/services/data-engineering",
 ];
 
 const languages: { lang: Lang; label: string }[] = [
@@ -129,12 +127,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
   const pathname = usePathname();
   const { lang, setLang, t } = useLanguage();
-
-  useEffect(() => setMounted(true), []);
 
   return (
     <nav className="fixed left-0 top-0 z-50 w-full border-b border-slate-200 bg-white/90 backdrop-blur dark:border-slate-700 dark:bg-slate-900/90">
@@ -184,15 +178,6 @@ export default function Navbar() {
             <LangDropdown lang={lang} setLang={setLang} />
           </div>
 
-          {mounted && (
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              aria-label="Toggle theme"
-              className="rounded-full p-2 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
-            >
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-          )}
 
           <Link
             href="/contact"

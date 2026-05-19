@@ -1,43 +1,31 @@
-import type { Metadata } from "next";
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "Data Engineering & ETL — Samiteon",
-  description:
-    "Delivering scalable, automated, and high-performance data integration solutions. 15+ years of expertise in Data Engineering & ETL.",
-};
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const coreExpertise = [
   {
     category: "Traditional ETL",
     items: ["Structured, batch-based ETL systems", "Enterprise Data Warehousing", "SSIS-based enterprise pipelines", "SQL Agent & scheduler-based automation"],
-    color: "border-cyan-200 dark:border-cyan-800",
-    dot: "bg-cyan-500",
+    color: "border-cyan-200 dark:border-cyan-800", dot: "bg-cyan-500",
   },
   {
     category: "Modern Data Platforms",
     items: ["Cloud-native data engineering", "Real-time & distributed data processing", "Azure Data Factory (ADF) at scale", "PySpark / Databricks — distributed compute"],
-    color: "border-blue-200 dark:border-blue-800",
-    dot: "bg-blue-500",
+    color: "border-blue-200 dark:border-blue-800", dot: "bg-blue-500",
   },
   {
     category: "Data Source Handling",
     items: ["Legacy: DBF, FoxPro, Access, Flat Files", "Real-time ingestion from APIs & streams", "Azure Data Lake, SharePoint, SaaS", "Schema evolution & dynamic pipelines"],
-    color: "border-violet-200 dark:border-violet-800",
-    dot: "bg-violet-500",
+    color: "border-violet-200 dark:border-violet-800", dot: "bg-violet-500",
   },
 ];
 
 const techStack = [
-  { name: "SSIS", label: "Traditional ETL" },
-  { name: "Azure Data Factory", label: "Orchestration" },
-  { name: "PySpark + Python", label: "Distributed" },
-  { name: "Databricks", label: "Big Data" },
-  { name: "Power BI / Tableau", label: "Visualization" },
-  { name: "SSRS", label: "Reporting" },
-  { name: "SQL Server / Oracle", label: "Database" },
-  { name: "Azure Data Lake", label: "Storage" },
+  { name: "SSIS", label: "Traditional ETL" }, { name: "Azure Data Factory", label: "Orchestration" },
+  { name: "PySpark + Python", label: "Distributed" }, { name: "Databricks", label: "Big Data" },
+  { name: "Power BI / Tableau", label: "Visualization" }, { name: "SSRS", label: "Reporting" },
+  { name: "SQL Server / Oracle", label: "Database" }, { name: "Azure Data Lake", label: "Storage" },
 ];
 
 const capabilities = [
@@ -70,6 +58,10 @@ const whyUs = [
 ];
 
 export default function DataEngineeringPage() {
+  const { t } = useLanguage();
+  const p = t.dataEng;
+  const c = t.common;
+
   return (
     <main className="min-h-screen pt-24 text-slate-900 dark:text-slate-100">
 
@@ -77,17 +69,12 @@ export default function DataEngineeringPage() {
       <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-cyan-950 to-slate-900 px-6 py-24 text-white">
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 20% 50%, #06b6d4 0%, transparent 50%), radial-gradient(circle at 80% 20%, #3b82f6 0%, transparent 50%)" }} />
         <div className="relative mx-auto max-w-7xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-cyan-400">Services</p>
-          <h1 className="max-w-4xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-            Data Engineering & ETL Capabilities
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-            Delivering scalable, automated, and high-performance data integration solutions.
-            Samiteon brings <strong className="text-white">15+ years of expertise</strong> in Data Engineering & Automation.
-          </p>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-cyan-400">{c.services}</p>
+          <h1 className="max-w-4xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">{p.heroTitle}</h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">{p.heroDesc}</p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <Link href="/contact" className="rounded-lg bg-cyan-600 px-8 py-3 font-semibold text-white shadow-lg transition hover:bg-cyan-500">Inquire Now</Link>
-            <Link href="#capabilities" className="rounded-lg border border-white/30 px-8 py-3 font-semibold text-white transition hover:bg-white/10">Explore Capabilities</Link>
+            <Link href="/contact" className="rounded-lg bg-cyan-600 px-8 py-3 font-semibold text-white shadow-lg transition hover:bg-cyan-500">{c.inquireNow}</Link>
+            <Link href="#capabilities" className="rounded-lg border border-white/30 px-8 py-3 font-semibold text-white transition hover:bg-white/10">{c.exploreCapabilities}</Link>
           </div>
         </div>
       </section>
@@ -97,8 +84,8 @@ export default function DataEngineeringPage() {
         <Image src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=1600&q=80" alt="Data engineering pipelines" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 px-6 pb-10">
-          <p className="text-xs font-semibold uppercase tracking-widest text-cyan-300">15+ Years of Expertise</p>
-          <h2 className="mt-1 text-2xl font-bold text-white sm:text-3xl">Traditional ETL to Modern Cloud Platforms</h2>
+          <p className="text-xs font-semibold uppercase tracking-widest text-cyan-300">{p.imageLabel}</p>
+          <h2 className="mt-1 text-2xl font-bold text-white sm:text-3xl">{p.imageTitle}</h2>
         </div>
       </div>
 
@@ -107,11 +94,9 @@ export default function DataEngineeringPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 flex items-center gap-3">
             <span className="h-8 w-1.5 rounded-full bg-cyan-500" />
-            <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">Our Core Expertise</h2>
+            <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">{p.coreTitle}</h2>
           </div>
-          <p className="mb-10 max-w-3xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
-            Strong foundation in structured, batch-based ETL systems and Enterprise Data Warehousing — with advanced capabilities in cloud-native data engineering and real-time distributed data processing.
-          </p>
+          <p className="mb-10 max-w-3xl text-base leading-relaxed text-slate-600 dark:text-slate-300">{p.coreDesc}</p>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {coreExpertise.map(({ category, items, color, dot }) => (
               <div key={category} className={`rounded-2xl border-2 ${color} bg-slate-50 p-6 dark:bg-slate-900`}>
@@ -120,8 +105,7 @@ export default function DataEngineeringPage() {
                 <ul className="space-y-2">
                   {items.map(item => (
                     <li key={item} className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
-                      <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${dot}`} />
-                      {item}
+                      <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${dot}`} />{item}
                     </li>
                   ))}
                 </ul>
@@ -137,11 +121,9 @@ export default function DataEngineeringPage() {
           <div>
             <div className="mb-4 flex items-center gap-3">
               <span className="h-8 w-1.5 rounded-full bg-cyan-500" />
-              <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">ETL Tools & Technologies</h2>
+              <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">{p.techTitle}</h2>
             </div>
-            <p className="mb-8 text-base leading-relaxed text-slate-600 dark:text-slate-300">
-              Spanning both traditional enterprise tools and the latest modern data stack — we meet you where you are and take you where you need to go.
-            </p>
+            <p className="mb-8 text-base leading-relaxed text-slate-600 dark:text-slate-300">{p.techDesc}</p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {techStack.map(({ name, label }) => (
                 <div key={name} className="rounded-xl border border-slate-200 bg-white p-3 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800">
@@ -166,11 +148,9 @@ export default function DataEngineeringPage() {
           <div>
             <div className="mb-4 flex items-center gap-3">
               <span className="h-8 w-1.5 rounded-full bg-cyan-500" />
-              <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">Medallion Data Architecture</h2>
+              <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">{p.medallionTitle}</h2>
             </div>
-            <p className="mb-6 text-base leading-relaxed text-slate-600 dark:text-slate-300">
-              Lakehouse architecture combining the best of Data Lake and Data Warehouse — structured as a three-tier Medallion model for maximum flexibility and performance.
-            </p>
+            <p className="mb-6 text-base leading-relaxed text-slate-600 dark:text-slate-300">{p.medallionDesc}</p>
             <div className="space-y-4">
               {architecture.map(({ tier, label, desc }, i) => {
                 const colors = ["bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300", "bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-200", "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-300"];
@@ -194,7 +174,7 @@ export default function DataEngineeringPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 flex items-center gap-3">
             <span className="h-8 w-1.5 rounded-full bg-cyan-500" />
-            <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">Next-Gen Data Engineering Capabilities</h2>
+            <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">{p.capabilitiesTitle}</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {capabilities.map(({ title, icon }) => (
@@ -214,19 +194,19 @@ export default function DataEngineeringPage() {
         </div>
       </section>
 
-      {/* Reporting & Visualization — image right */}
+      {/* Reporting & Visualization */}
       <section className="w-full border-t border-slate-200 bg-white px-6 py-16 dark:border-slate-800 dark:bg-slate-950">
         <div className="mx-auto max-w-7xl grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
             <div className="mb-4 flex items-center gap-3">
               <span className="h-8 w-1.5 rounded-full bg-cyan-500" />
-              <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">Reporting & Visualization</h2>
+              <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">{p.reportingTitle}</h2>
             </div>
-            <p className="mt-2 mb-6 text-base leading-relaxed text-slate-600 dark:text-slate-300">From traditional SSRS reports to modern self-service BI — we deliver insights at every level of the organisation.</p>
+            <p className="mt-2 mb-6 text-base leading-relaxed text-slate-600 dark:text-slate-300">{p.reportingDesc}</p>
             <div className="grid gap-4 sm:grid-cols-2">
               {[
-                { title: "Traditional Reporting", items: ["SSRS parameterized & scheduled reports", "Static dashboards & structured reporting"] },
-                { title: "Modern Analytics", items: ["Power BI / Tableau real-time dashboards", "Self-service BI & semantic layer", "Advanced analytics & forecasting", "AI/ML insights integration"] },
+                { title: p.tradReportingTitle, items: ["SSRS parameterized & scheduled reports", "Static dashboards & structured reporting"] },
+                { title: p.modernAnalyticsTitle, items: ["Power BI / Tableau real-time dashboards", "Self-service BI & semantic layer", "Advanced analytics & forecasting", "AI/ML insights integration"] },
               ].map(({ title, items }) => (
                 <div key={title} className="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900">
                   <p className="mb-3 font-semibold text-slate-900 dark:text-slate-100">{title}</p>
@@ -250,9 +230,9 @@ export default function DataEngineeringPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 flex items-center gap-3">
             <span className="h-8 w-1.5 rounded-full bg-cyan-500" />
-            <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">Our Client Portfolio</h2>
+            <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">{p.clientPortfolioTitle}</h2>
           </div>
-          <p className="mb-8 text-base text-slate-600 dark:text-slate-300">Successfully implemented ETL and automation projects for leading enterprises:</p>
+          <p className="mb-8 text-base text-slate-600 dark:text-slate-300">{p.clientPortfolioDesc}</p>
           <div className="flex flex-wrap gap-3">
             {clients.map(client => (
               <span key={client} className="rounded-full border border-cyan-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm dark:border-cyan-800 dark:bg-slate-800 dark:text-slate-200">
@@ -272,7 +252,7 @@ export default function DataEngineeringPage() {
           <div>
             <div className="mb-4 flex items-center gap-3">
               <span className="h-8 w-1.5 rounded-full bg-cyan-500" />
-              <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">Why Choose Us</h2>
+              <h2 className="text-2xl font-bold tracking-tight lg:text-3xl">{p.whyUsTitle}</h2>
             </div>
             <ul className="space-y-3">
               {whyUs.map(item => (
@@ -287,7 +267,7 @@ export default function DataEngineeringPage() {
               ))}
             </ul>
             <p className="mt-6 rounded-xl border border-cyan-200 bg-cyan-50 p-4 text-sm font-medium italic text-cyan-800 dark:border-cyan-800 dark:bg-cyan-950/40 dark:text-cyan-300">
-              "We don't just build ETL pipelines — we transform legacy data systems into scalable, intelligent, and future-ready data platforms."
+              &ldquo;{p.whyUsQuote}&rdquo;
             </p>
           </div>
         </div>
@@ -298,9 +278,9 @@ export default function DataEngineeringPage() {
         <Image src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1600&q=80" alt="Data engineering CTA" fill className="object-cover" />
         <div className="absolute inset-0 bg-cyan-900/85" />
         <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">Ready to Transform Your Data?</h2>
-          <p className="mt-4 max-w-xl text-lg text-cyan-100">Global Delivery Centers in USA & India — Email us at swathi@samiteon.com</p>
-          <Link href="/contact" className="mt-8 rounded-lg bg-white px-10 py-4 font-bold text-cyan-700 shadow-lg transition hover:bg-cyan-50">Inquire</Link>
+          <h2 className="text-3xl font-bold text-white sm:text-4xl">{p.ctaTitle}</h2>
+          <p className="mt-4 max-w-xl text-lg text-cyan-100">{p.ctaDesc}</p>
+          <Link href="/contact" className="mt-8 rounded-lg bg-white px-10 py-4 font-bold text-cyan-700 shadow-lg transition hover:bg-cyan-50">{c.inquire}</Link>
         </div>
       </div>
 

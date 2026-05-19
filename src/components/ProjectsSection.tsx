@@ -8,7 +8,6 @@ const hrefs = [
   "/solutions/lynx",
   "/solutions/pms",
   "/solutions/senior-care",
-  "/services/data-engineering",
 ];
 
 const images = [
@@ -16,7 +15,6 @@ const images = [
   "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
   "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
   "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=600&q=80",
 ];
 
 export default function ProjectsSection() {
