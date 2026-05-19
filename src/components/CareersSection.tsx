@@ -53,7 +53,7 @@ export default function CareersSection() {
             Browse open roles and apply directly through our jobs portal.
           </p>
           <div className="mx-auto mt-6 flex max-w-sm flex-col gap-2 text-left">
-            {["Competitive pay & flexible work", "Global team across 4 countries", "Fast growth & real ownership"].map(item => (
+            {["Competitive pay & flexible work", "Fast growth & real ownership"].map(item => (
               <div key={item} className="flex items-center gap-2 text-sm text-blue-100">
                 <svg className="h-4 w-4 shrink-0 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
