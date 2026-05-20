@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
-import { LogOut, RefreshCw, Mail, Phone, MessageSquare, Calendar } from "lucide-react";
+import { LogOut, Mail, Phone, MessageSquare, Calendar, Trash2, Eye, EyeOff } from "lucide-react";
 
 type Submission = {
   id: string;
@@ -13,11 +13,13 @@ type Submission = {
 
 export default function AdminPage() {
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [authed, setAuthed] = useState(false);
   const [authError, setAuthError] = useState("");
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const fetchAll = useCallback(async (pwd: string) => {
     setLoading(true);
@@ -51,6 +53,24 @@ export default function AdminPage() {
     fetchAll(password);
   }
 
+  async function handleDelete(id: string) {
+    if (!confirm("Delete this submission?")) return;
+    setDeletingId(id);
+    try {
+      const pwd = sessionStorage.getItem("admin_pwd") || "";
+      const res = await fetch(`/api/admin/submissions/${id}`, {
+        method: "DELETE",
+        headers: { "x-admin-password": pwd },
+      });
+      if (!res.ok) throw new Error("Failed to delete.");
+      setSubmissions((prev) => prev.filter((s) => s.id !== id));
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Delete failed.");
+    } finally {
+      setDeletingId(null);
+    }
+  }
+
   function handleLogout() {
     sessionStorage.removeItem("admin_pwd");
     setAuthed(false);
@@ -65,14 +85,23 @@ export default function AdminPage() {
           <h1 className="mb-1 text-2xl font-bold text-slate-900 dark:text-white">Admin Login</h1>
           <p className="mb-6 text-sm text-slate-500">Samiteon internal dashboard</p>
           <form onSubmit={handleLogin} className="space-y-4">
-            <input
-              type="password"
-              placeholder="Enter admin password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-white"
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter admin password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 pr-12 text-slate-900 outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-white"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
             {authError && <p className="text-sm text-red-600">{authError}</p>}
             <button type="submit" className="w-full rounded-xl bg-blue-700 py-3 font-semibold text-white hover:bg-blue-800">
               Login
@@ -98,12 +127,6 @@ export default function AdminPage() {
         </div>
         <div className="flex gap-3">
           <button
-            onClick={() => fetchAll(sessionStorage.getItem("admin_pwd") || "")}
-            className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300"
-          >
-            <RefreshCw size={15} /> Refresh
-          </button>
-          <button
             onClick={handleLogout}
             className="flex items-center gap-2 rounded-xl bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
           >
@@ -113,7 +136,7 @@ export default function AdminPage() {
       </div>
 
       {/* Stats */}
-      <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-2">
+      <div className="mb-8 grid grid-cols-2 gap-4">
         {[
           { label: "Total Enquiries",   value: submissions.length },
           { label: "Enquiries (Month)", value: submissions.filter(s => thisMonth(s.created_at)).length },
@@ -142,9 +165,18 @@ export default function AdminPage() {
           <div key={s.id} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
             <div className="flex flex-wrap items-start justify-between gap-2">
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">{s.name}</h2>
-              <span className="flex items-center gap-1 text-xs text-slate-400">
-                <Calendar size={12} /> {new Date(s.created_at).toLocaleString()}
-              </span>
+              <div className="flex items-center gap-3">
+                <span className="flex items-center gap-1 text-xs text-slate-400">
+                  <Calendar size={12} /> {new Date(s.created_at).toLocaleString()}
+                </span>
+                <button
+                  onClick={() => handleDelete(s.id)}
+                  disabled={deletingId === s.id}
+                  className="flex items-center gap-1 rounded-lg border border-red-200 px-2.5 py-1 text-xs font-medium text-red-500 hover:bg-red-50 disabled:opacity-50 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-900/20"
+                >
+                  <Trash2 size={12} /> {deletingId === s.id ? "Deleting..." : "Delete"}
+                </button>
+              </div>
             </div>
             <div className="mt-3 flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-400">
               <span className="flex items-center gap-1">

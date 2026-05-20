@@ -13,6 +13,7 @@ const stats = [
 export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [formError, setFormError] = useState("");
   const [form, setForm] = useState({ name: "", email: "", mobile: "", message: "" });
   const { t } = useLanguage();
   const c = t.contact;
@@ -20,15 +21,23 @@ export default function ContactSection() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
+    setFormError("");
     try {
-      await fetch("/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-    } catch {/* ignore */} finally {
-      setLoading(false);
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setFormError(data.error || "Something went wrong. Please try again.");
+        return;
+      }
       setSubmitted(true);
+    } catch {
+      setFormError("Network error. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -139,6 +148,11 @@ export default function ContactSection() {
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-500 dark:focus:ring-blue-900"
                   />
+                  {formError && (
+                    <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400">
+                      {formError}
+                    </p>
+                  )}
                   <button
                     type="submit"
                     disabled={loading}

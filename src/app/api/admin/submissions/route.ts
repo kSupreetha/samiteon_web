@@ -18,3 +18,22 @@ export async function GET(request: Request) {
 
   return Response.json({ submissions: data });
 }
+
+export async function DELETE(request: Request) {
+  const password = request.headers.get("x-admin-password");
+
+  if (password !== process.env.ADMIN_PASSWORD) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { error } = await supabase
+    .from("contact_submissions")
+    .delete()
+    .neq("id", "00000000-0000-0000-0000-000000000000");
+
+  if (error) {
+    return Response.json({ error: error.message }, { status: 500 });
+  }
+
+  return Response.json({ success: true });
+}
