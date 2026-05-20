@@ -2,13 +2,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
-import FadeIn from "@/components/FadeIn";
-import HeroSection from "@/components/HeroSection";
-import CertificationsSection from "@/components/CertificationsSection";
-import ServicesSection from "@/components/ServicesSection";
-import ProjectsSection from "@/components/ProjectsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import ContactSection from "@/components/ContactSection";
+import FadeIn from "@/components/ui/FadeIn";
+import HeroSection from "@/components/sections/HeroSection";
+import CertificationsSection from "@/components/sections/CertificationsSection";
+import ServicesSection from "@/components/sections/ServicesSection";
+import ProjectsSection from "@/components/sections/ProjectsSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import ContactSection from "@/components/sections/ContactSection";
 
 export default function HomeContent() {
   const { t } = useLanguage();

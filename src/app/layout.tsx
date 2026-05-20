@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ThemeProvider from "@/components/ThemeProvider";
-import ParticleBackground from "@/components/ParticleBackground";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import ScrollToTop from "@/components/ScrollToTop";
-import ChatBotWrapper from "@/components/ChatBotWrapper";
+import ThemeProvider from "@/components/layout/ThemeProvider";
+import ParticleBackground from "@/components/ui/ParticleBackground";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import ScrollToTop from "@/components/ui/ScrollToTop";
+import ChatBotWrapper from "@/components/chatbot/ChatBotWrapper";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const geistSans = Geist({

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import CareersSection from "@/components/CareersSection";
+import CareersSection from "@/components/sections/CareersSection";
 
 export const metadata: Metadata = {
   title: "Careers — Samiteon",

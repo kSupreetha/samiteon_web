@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ServicesSection from "@/components/ServicesSection";
+import ServicesSection from "@/components/sections/ServicesSection";
 
 export const metadata: Metadata = {
   title: "Services — Samiteon",

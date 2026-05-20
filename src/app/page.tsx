@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import HomeContent from "@/components/HomeContent";
+import HomeContent from "@/components/ui/HomeContent";
 
 export const metadata: Metadata = {
   title: "Samiteon — Digital Solutions for Modern Businesses",

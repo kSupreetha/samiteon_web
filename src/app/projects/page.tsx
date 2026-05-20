@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import ProjectsSection from "@/components/ProjectsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
+import ProjectsSection from "@/components/sections/ProjectsSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
 
 export const metadata: Metadata = {
   title: "Projects — Samiteon",
