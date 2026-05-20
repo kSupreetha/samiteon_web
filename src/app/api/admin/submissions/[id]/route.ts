@@ -1,4 +1,9 @@
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@supabase/supabase-js";
+
+const adminSupabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
 
 export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const password = request.headers.get("x-admin-password");
@@ -9,7 +14,7 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
 
   const { id } = await params;
 
-  const { error } = await supabase
+  const { error } = await adminSupabase
     .from("contact_submissions")
     .delete()
     .eq("id", id);
