@@ -24,7 +24,9 @@ type TeamMember = {
   group_name: string;
   sort_order: number;
   is_active: boolean;
-  career_start_year: number | null;
+  prev_exp_years: number;
+  prev_exp_months: number;
+  joining_date: string | null;
 };
 
 const GROUPS = [
@@ -43,7 +45,9 @@ const EMPTY_FORM = {
   avatar: "",
   group_name: "Leadership",
   sort_order: 0,
-  career_start_year: "",
+  prev_exp_years: "0",
+  prev_exp_months: "0",
+  joining_date: "",
 };
 
 export default function AdminPage() {
@@ -165,7 +169,9 @@ export default function AdminPage() {
       avatar: member.avatar,
       group_name: member.group_name,
       sort_order: member.sort_order,
-      career_start_year: member.career_start_year ? String(member.career_start_year) : "",
+      prev_exp_years: String(member.prev_exp_years ?? 0),
+      prev_exp_months: String(member.prev_exp_months ?? 0),
+      joining_date: member.joining_date ?? "",
     });
     setShowForm(true);
   }
@@ -189,7 +195,9 @@ export default function AdminPage() {
         avatar: formData.avatar,
         group_name: formData.group_name,
         sort_order: Number(formData.sort_order),
-        career_start_year: formData.career_start_year ? Number(formData.career_start_year) : null,
+        prev_exp_years: Number(formData.prev_exp_years) || 0,
+        prev_exp_months: Number(formData.prev_exp_months) || 0,
+        joining_date: formData.joining_date || null,
       };
       const url = editingId ? `/api/admin/team/${editingId}` : "/api/admin/team";
       const method = editingId ? "PUT" : "POST";
@@ -500,22 +508,53 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <div className="sm:w-1/3">
-                  <label className="mb-1 block text-xs font-medium text-slate-600 dark:text-slate-400">
-                    Career Start Year <span className="font-normal text-slate-400">(e.g. 2012 — auto-calculates experience)</span>
-                  </label>
-                  <input
-                    type="number"
-                    min={1970}
-                    max={new Date().getFullYear()}
-                    value={formData.career_start_year}
-                    onChange={e => setFormData(f => ({ ...f, career_start_year: e.target.value }))}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-white"
-                    placeholder="e.g. 2012"
-                  />
-                  {formData.career_start_year && (
-                    <p className="mt-1 text-xs text-slate-400">
-                      = {new Date().getFullYear() - Number(formData.career_start_year)}+ years shown on card
+                <div>
+                  <p className="mb-2 text-xs font-medium text-slate-600 dark:text-slate-400">
+                    Experience <span className="font-normal text-slate-400">(before joining Samiteon)</span>
+                  </p>
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    <div>
+                      <label className="mb-1 block text-xs text-slate-500">Years</label>
+                      <input
+                        type="number" min={0} max={50}
+                        value={formData.prev_exp_years}
+                        onChange={e => setFormData(f => ({ ...f, prev_exp_years: e.target.value }))}
+                        className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-white"
+                        placeholder="0"
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-1 block text-xs text-slate-500">Months (0–11)</label>
+                      <input
+                        type="number" min={0} max={11}
+                        value={formData.prev_exp_months}
+                        onChange={e => setFormData(f => ({ ...f, prev_exp_months: e.target.value }))}
+                        className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-white"
+                        placeholder="0"
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-1 block text-xs text-slate-500">Joining Date at Samiteon</label>
+                      <input
+                        type="date"
+                        value={formData.joining_date}
+                        onChange={e => setFormData(f => ({ ...f, joining_date: e.target.value }))}
+                        className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 dark:border-slate-600 dark:bg-slate-800 dark:text-white"
+                      />
+                    </div>
+                  </div>
+                  {(formData.prev_exp_years || formData.prev_exp_months || formData.joining_date) && (
+                    <p className="mt-2 text-xs text-slate-400">
+                      {(() => {
+                        const prev = Number(formData.prev_exp_years) * 12 + Number(formData.prev_exp_months);
+                        let atCompany = 0;
+                        if (formData.joining_date) {
+                          const joined = new Date(formData.joining_date);
+                          const now = new Date();
+                          atCompany = (now.getFullYear() - joined.getFullYear()) * 12 + (now.getMonth() - joined.getMonth());
+                        }
+                        return `= ${Math.floor((prev + atCompany) / 12)}+ years shown on card`;
+                      })()}
                     </p>
                   )}
                 </div>

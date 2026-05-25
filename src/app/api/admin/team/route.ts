@@ -26,11 +26,11 @@ export async function POST(request: Request) {
   if (!checkAuth(request)) return Response.json({ error: "Unauthorized" }, { status: 401 });
 
   const body = await request.json();
-  const { name, role, bio, full_bio, avatar, group_name, sort_order, career_start_year } = body;
+  const { name, role, bio, full_bio, avatar, group_name, sort_order, prev_exp_years, prev_exp_months, joining_date } = body;
 
   const { data, error } = await adminSupabase
     .from("team_members")
-    .insert([{ name, role, bio, full_bio, avatar, group_name, sort_order: sort_order ?? 0, career_start_year: career_start_year ?? null }])
+    .insert([{ name, role, bio, full_bio, avatar, group_name, sort_order: sort_order ?? 0, prev_exp_years: prev_exp_years ?? 0, prev_exp_months: prev_exp_months ?? 0, joining_date: joining_date ?? null }])
     .select()
     .single();
 

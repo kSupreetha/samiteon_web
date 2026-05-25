@@ -13,7 +13,9 @@ type Person = {
   avatar: string;
   group_name: string;
   sort_order: number;
-  career_start_year: number | null;
+  prev_exp_years: number;
+  prev_exp_months: number;
+  joining_date: string | null;
 };
 
 
@@ -71,6 +73,17 @@ function ProfileModal({ person, onClose }: { person: Person; onClose: () => void
   );
 }
 
+function calcTotalExp(prevYears: number, prevMonths: number, joiningDate: string | null): number {
+  const prevTotal = prevYears * 12 + prevMonths;
+  let atCompany = 0;
+  if (joiningDate) {
+    const joined = new Date(joiningDate);
+    const now = new Date();
+    atCompany = (now.getFullYear() - joined.getFullYear()) * 12 + (now.getMonth() - joined.getMonth());
+  }
+  return Math.floor((prevTotal + atCompany) / 12);
+}
+
 function PersonCard({ person }: { person: Person }) {
   const [open, setOpen] = React.useState(false);
   return (
@@ -82,9 +95,9 @@ function PersonCard({ person }: { person: Person }) {
         <div className="mt-4 text-center">
           <h3 className="font-bold text-slate-900 dark:text-slate-100">{person.name}</h3>
           <p className="mt-0.5 text-xs font-medium text-blue-600 dark:text-blue-400">{person.role}</p>
-          {person.career_start_year && (
+          {(person.prev_exp_years > 0 || person.prev_exp_months > 0 || person.joining_date) && (
             <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
-              {new Date().getFullYear() - person.career_start_year}+ years exp.
+              {calcTotalExp(person.prev_exp_years, person.prev_exp_months, person.joining_date)}+ years exp.
             </p>
           )}
         </div>
@@ -145,7 +158,9 @@ function ManagementSection() {
           avatar: m.avatar as string,
           group_name: m.group_name as string,
           sort_order: m.sort_order as number,
-          career_start_year: (m.career_start_year as number) ?? null,
+          prev_exp_years: (m.prev_exp_years as number) ?? 0,
+          prev_exp_months: (m.prev_exp_months as number) ?? 0,
+          joining_date: (m.joining_date as string) ?? null,
         }));
         setMembers(mapped);
       })

@@ -14,11 +14,11 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
 
   const { id } = await params;
   const body = await request.json();
-  const { name, role, bio, full_bio, avatar, group_name, sort_order, career_start_year } = body;
+  const { name, role, bio, full_bio, avatar, group_name, sort_order, prev_exp_years, prev_exp_months, joining_date } = body;
 
   const { data, error } = await adminSupabase
     .from("team_members")
-    .update({ name, role, bio, full_bio, avatar, group_name, sort_order, career_start_year: career_start_year ?? null })
+    .update({ name, role, bio, full_bio, avatar, group_name, sort_order, prev_exp_years: prev_exp_years ?? 0, prev_exp_months: prev_exp_months ?? 0, joining_date: joining_date ?? null })
     .eq("id", id)
     .select()
     .single();
