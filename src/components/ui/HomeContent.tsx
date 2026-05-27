@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
 import FadeIn from "@/components/ui/FadeIn";
 import HeroSection from "@/components/sections/HeroSection";
-import CertificationsSection from "@/components/sections/CertificationsSection";
 import ServicesSection from "@/components/sections/ServicesSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
@@ -31,8 +30,6 @@ export default function HomeContent() {
           </div>
         </section>
       </FadeIn>
-
-      <CertificationsSection />
 
       <FadeIn delay={0.1}><ServicesSection /></FadeIn>
       <FadeIn><ProjectsSection /></FadeIn>

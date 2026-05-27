@@ -6,6 +6,7 @@ const certs = [
   { src: "/webenc.svg",            alt: "WBE/WBC Certified",   bg: "bg-white" },
   { src: "/iso-certification.png", alt: "ISO 9001:2015 & ISO 27001:2022 Certified", bg: "bg-white" },
   { src: "/nmsdc-logo.svg",        alt: "NMSDC Certified",     bg: "bg-white" },
+  { src: "/salesforce.svg",        alt: "Salesforce Partner",  bg: "bg-white" },
 ];
 
 export default function CertificationsSection() {
@@ -28,7 +29,7 @@ export default function CertificationsSection() {
       </div>
 
       {/* static cert logos */}
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-10 px-6">
+      <div className="mx-auto flex max-w-6xl flex-nowrap items-center justify-center gap-6 px-6">
         {certs.map(({ src, alt, bg }) => (
           <div
             key={src}
