@@ -3,8 +3,9 @@ import Image from "next/image";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const certs = [
-  { src: "/webenc.svg",            alt: "WBE/WBC Certified" },
+  { src: "/microsoft.png",         alt: "Microsoft Solutions Partner" },
   { src: "/iso-certification.png", alt: "ISO 9001:2015 & ISO 27001:2022 Certified" },
+  { src: "/webenc.svg",            alt: "WBE/WBC Certified" },
   { src: "/nmsdc-logo.svg",        alt: "NMSDC Certified" },
   { src: "/salesforce.svg",        alt: "Salesforce Partner" },
 ];

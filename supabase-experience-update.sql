@@ -1,0 +1,14 @@
+UPDATE team_members SET career_start_year = 1998 WHERE name = 'Dr. Sundeep "Sunny" Dronawat';
+UPDATE team_members SET career_start_year = 1994 WHERE name = 'Curtis Warfield';
+UPDATE team_members SET career_start_year = 2004 WHERE name = 'Harsha Dronawat';
+UPDATE team_members SET career_start_year = 2001 WHERE name = 'Firas Hamza';
+UPDATE team_members SET career_start_year = 2014 WHERE name = 'Abhay Joshi';
+UPDATE team_members SET career_start_year = 2016 WHERE name = 'Salonee Dronawat';
+UPDATE team_members SET career_start_year = 2016 WHERE name = 'Swathi';
+UPDATE team_members SET career_start_year = 2004 WHERE name = 'Anand Mutalik';
+UPDATE team_members SET career_start_year = 2015 WHERE name = 'Arushi Jain';
+UPDATE team_members SET career_start_year = 2014 WHERE name = 'Paramita';
+UPDATE team_members SET career_start_year = 1996 WHERE name = 'Basavaraj P C';
+UPDATE team_members SET career_start_year = 2008 WHERE name = 'Somanath M';
+UPDATE team_members SET career_start_year = 2013 WHERE name = 'Sharath Chandramouli';
+UPDATE team_members SET career_start_year = 2019 WHERE name = 'Bhargavi B S';

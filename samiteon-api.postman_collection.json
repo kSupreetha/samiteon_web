@@ -1,0 +1,160 @@
+{
+  "info": {
+    "name": "Samiteon API",
+    "description": "All API endpoints for the Samiteon website",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "description": "Change to https://samiteon-web.vercel.app for production"
+    },
+    {
+      "key": "admin_password",
+      "value": "samiteon@admin123"
+    },
+    {
+      "key": "member_id",
+      "value": "",
+      "description": "Paste a team member ID here after fetching team"
+    },
+    {
+      "key": "submission_id",
+      "value": "",
+      "description": "Paste a contact submission ID here after fetching submissions"
+    }
+  ],
+  "item": [
+    {
+      "name": "Public",
+      "item": [
+        {
+          "name": "Get Active Team Members",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/team",
+            "description": "Returns all team members where is_active = true. Used by the About page."
+          }
+        },
+        {
+          "name": "Submit Contact Form",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/contact",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"mobile\": \"9876543210\",\n  \"message\": \"I am interested in your services.\"\n}"
+            },
+            "description": "Submits the contact form. Saves to Supabase and sends email notification."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin — Contact Submissions",
+      "item": [
+        {
+          "name": "Get All Submissions",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/admin/submissions",
+            "header": [
+              { "key": "x-admin-password", "value": "{{admin_password}}" }
+            ],
+            "description": "Returns all contact form submissions ordered by latest first."
+          }
+        },
+        {
+          "name": "Delete One Submission",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/admin/submissions/{{submission_id}}",
+            "header": [
+              { "key": "x-admin-password", "value": "{{admin_password}}" }
+            ],
+            "description": "Permanently deletes a single contact submission by ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin — Team Members",
+      "item": [
+        {
+          "name": "Get All Team Members",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/admin/team",
+            "header": [
+              { "key": "x-admin-password", "value": "{{admin_password}}" }
+            ],
+            "description": "Returns all team members including inactive ones. Admin only."
+          }
+        },
+        {
+          "name": "Add New Member",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/admin/team",
+            "header": [
+              { "key": "x-admin-password", "value": "{{admin_password}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Smith\",\n  \"role\": \"Software Engineer\",\n  \"bio\": \"Short bio shown on the card.\",\n  \"full_bio\": [\n    \"First paragraph of the full bio.\",\n    \"Second paragraph of the full bio.\"\n  ],\n  \"avatar\": \"/team/jane.webp\",\n  \"group_name\": \"Technology\",\n  \"sort_order\": 5,\n  \"prev_exp_years\": 4,\n  \"prev_exp_months\": 6,\n  \"joining_date\": \"2022-03-01\"\n}"
+            },
+            "description": "Creates a new team member. is_active defaults to true."
+          }
+        },
+        {
+          "name": "Update Member",
+          "request": {
+            "method": "PUT",
+            "url": "{{base_url}}/api/admin/team/{{member_id}}",
+            "header": [
+              { "key": "x-admin-password", "value": "{{admin_password}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Smith\",\n  \"role\": \"Senior Software Engineer\",\n  \"bio\": \"Updated short bio.\",\n  \"full_bio\": [\n    \"Updated first paragraph.\",\n    \"Updated second paragraph.\"\n  ],\n  \"avatar\": \"/team/jane.webp\",\n  \"group_name\": \"Technology\",\n  \"sort_order\": 5,\n  \"prev_exp_years\": 5,\n  \"prev_exp_months\": 0,\n  \"joining_date\": \"2022-03-01\"\n}"
+            },
+            "description": "Updates all fields of an existing team member."
+          }
+        },
+        {
+          "name": "Toggle Active / Inactive",
+          "request": {
+            "method": "PATCH",
+            "url": "{{base_url}}/api/admin/team/{{member_id}}",
+            "header": [
+              { "key": "x-admin-password", "value": "{{admin_password}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"is_active\": false\n}"
+            },
+            "description": "Soft delete — set is_active to false to hide from website, true to show again."
+          }
+        },
+        {
+          "name": "Delete Member",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/admin/team/{{member_id}}",
+            "header": [
+              { "key": "x-admin-password", "value": "{{admin_password}}" }
+            ],
+            "description": "Permanently deletes a team member from the database."
+          }
+        }
+      ]
+    }
+  ]
+}
